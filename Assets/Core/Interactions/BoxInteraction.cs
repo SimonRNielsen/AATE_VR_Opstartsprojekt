@@ -6,15 +6,16 @@ using UnityEngine.XR.Interaction.Toolkit.Transformers;
 public class BoxInteraction : MonoBehaviour
 {
 
-    public Transform leftHandAttach;
-    public Transform rightHandAttach;
     public XRGrabInteractable grab;
     public XRGeneralGrabTransformer transformer;
+    private Transform startPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
+        startPosition = transform;
+
     }
 
     // Update is called once per frame
@@ -25,31 +26,6 @@ public class BoxInteraction : MonoBehaviour
             transformer.enabled = false;
         else
             transformer.enabled = true;
-
-    }
-
-
-    private void OnEnable()
-    {
-
-        grab.selectEntered.AddListener(OnSelectEnter);
-
-    }
-
-    private void OnDisable()
-    {
-
-        grab.selectEntered.RemoveListener(OnSelectEnter);
-
-    }
-
-    private void OnSelectEnter(SelectEnterEventArgs args)
-    {
-
-        if (args.interactorObject.transform.name.Contains("Left"))
-            grab.attachTransform = leftHandAttach;
-        else
-            grab.attachTransform = rightHandAttach;
 
     }
 

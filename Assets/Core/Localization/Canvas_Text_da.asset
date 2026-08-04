@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Canvas_Text_da
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: da
+  m_SharedData: {fileID: 11400000, guid: d43afefec56262248a64d6c05cff80e9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 65557999616
+    m_Localized: Tilbage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 160416378880
+    m_Localized: "N\xE6ste"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301311438848
+    m_Localized: Luk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 586188566528
+    m_Localized: "Intro p\xE5 dansk"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 702085574656
+    m_Localized: "Instrukser p\xE5 dansk"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 728459358208
+    m_Localized: "Afsluttende bem\xE6rkninger p\xE5 dansk"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1156882345984
+    m_Localized: Dansk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1223789883392
+    m_Localized: Engelsk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2732296482816
+    m_Localized: "Testomr\xE5de"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
