@@ -4,26 +4,32 @@ using UnityEngine.Localization.Settings;
 public class MainRoomScript : MonoBehaviour
 {
 
+    [SerializeField] private Canvas first, second, third;
     private bool initialized = false, running = false;
-    [SerializeField]
-    private Canvas first, second, third;
+    private Camera cam;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created, used for debugging and initializing
     void Start()
     {
 
+        if (!first || !second || !third)
+            Debug.LogWarning("One or more canvases were not assigned");
 
+        if (Camera.main)
+            cam = Camera.main;
+        else
+            Debug.LogWarning("No main camera found for use in " + gameObject.name);
 
     }
 
-    // Update is called once per frame
+    // Update is called once per frame, used to rotate canvas' towards player
     void Update()
     {
 
-        if (!running)
+        if (!running || !first || !second || !third || !cam)
             return;
 
-        Vector3 direction = first.transform.position - Camera.main.transform.position;
+        Vector3 direction = first.transform.position - cam.transform.position;
         direction.y = 0f;
 
         Quaternion rotation = Quaternion.LookRotation(direction);
@@ -34,7 +40,10 @@ public class MainRoomScript : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Detects if player enters trigger area, and displays canvas' if so
+    /// </summary>
+    /// <param name="other">Colliding trigger</param>
     private void OnTriggerEnter(Collider other)
     {
 
@@ -48,7 +57,9 @@ public class MainRoomScript : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Ensures Localization is initialized
+    /// </summary>
     private async void OnEnable()
     {
 
@@ -56,20 +67,21 @@ public class MainRoomScript : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Used to change localization dynamically
+    /// </summary>
+    /// <param name="language">Abbreviation for language to change to</param>
     public void SetLanguage(string language) => LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(language);
 
-
+    /// <summary>
+    /// Function to transition between canvas'
+    /// </summary>
+    /// <param name="index">Canvas to display (1-3)</param>
     public void ShowCanvas(int index = 1)
     {
 
-        if (first == null || second == null || third == null)
-        {
-
-            Debug.LogWarning("One or more canvases were not assigned");
+        if (!first || !second || !third)
             return;
-
-        }
 
         switch (index)
         {
@@ -91,13 +103,17 @@ public class MainRoomScript : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Changes alpha value and interactability of a canvas
+    /// </summary>
+    /// <param name="canvas">Canvas to modify</param>
+    /// <param name="visible">True for visible, else false</param>
     private void SetCanvasVisibility(Canvas canvas, bool visible)
     {
 
         CanvasGroup group = canvas.GetComponent<CanvasGroup>();
 
-        if (group == null)
+        if (!group)
             return;
 
         group.alpha = visible ? 1f : 0f;
@@ -106,7 +122,9 @@ public class MainRoomScript : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Function to "close" the final menu
+    /// </summary>
     public void CloseMenu()
     {
 

@@ -4,35 +4,28 @@ using UnityEngine.InputSystem;
 public class AnimateHandOnInput : MonoBehaviour
 {
 
-    public InputActionProperty triggerValue;
-    public InputActionProperty gripValue;
-    public Animator animator;
+    [SerializeField] private InputActionProperty triggerValue;
+    [SerializeField] private InputActionProperty gripValue;
+    [SerializeField] private Animator animator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created, used for debugging
     void Start()
     {
-        
 
+        if (!animator)
+            Debug.LogWarning("No animator found/assigned for " + gameObject.name);
 
     }
 
-    // Update is called once per frame
+    // Update is called once per frame, used for animation parameters/blend values
     void Update()
     {
 
-        if (animator == null)
-        {
-
-            Debug.Log("No animator assigned");
+        if (!animator)
             return;
 
-        }
-
-        float trigger = triggerValue.action.ReadValue<float>();
-        float grip = gripValue.action.ReadValue<float>();
-
-        animator.SetFloat("Trigger", trigger);
-        animator.SetFloat("Grip", grip);
+        animator.SetFloat("Trigger", triggerValue.action.ReadValue<float>());
+        animator.SetFloat("Grip", gripValue.action.ReadValue<float>());
 
     }
 }
